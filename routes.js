@@ -8,4 +8,8 @@ router.get('/test', (req, res) => {
     res.send({ 'test': 'test-api' })
 })
 
+router.get('/hello', (req, res) => {
+    res.send({ 'hello': 'hello world' })
+})
+
 module.exports = router
