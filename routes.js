@@ -1,15 +1,13 @@
 const router = require('express').Router()
+const mongoose = require('mongoose')
 
-router.get('/', (req, res) => {
-    res.send({ 'test': 123 })
+router.post('/test', (req, res) => {
+    res.status(201).send({ 'mongoose': 'connected' });
 })
 
 router.get('/test', (req, res) => {
-    res.send({ 'test': 1234 })
-})
-
-router.get('/hello', (req, res) => {
-    res.send({ 'hello': 'hello world' })
+    let error = 'You cannot access this route in GET method!'
+    res.status(500).send({ message: `Internal Server Error.\n\n${error}`})
 })
 
 module.exports = router
