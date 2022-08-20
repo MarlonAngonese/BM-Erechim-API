@@ -5,7 +5,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/test', (req, res) => {
-    res.send({ 'test': 'test-api' })
+    res.send({ 'test': 1234 })
 })
 
 router.get('/hello', (req, res) => {
