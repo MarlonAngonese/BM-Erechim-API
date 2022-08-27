@@ -64,4 +64,32 @@ router.get('/', async (req, res) => {
     }
 })
 
+/**
+ * User login
+ */
+router.post('/login', async (req, res) => {
+    const user = await User.findOne({ email: req.body.email }).exec()
+
+    if (!user) {
+        return res.status(401).json({ error: "Credenciais incorretas. Tente novamente!" })
+    }
+
+    try {
+        // Check password
+        // if(!req.body.password) {
+        //     return res.status(401).json({ error: "Credenciais incorretas. Tente novamente!" })
+        // }
+
+        validatePassword = await bcrypt.compare(req.body.password, user.password);
+
+        if (!validatePassword) {
+            return res.status(401).json({ error: "Credenciais incorretas. Tente novamente!" })
+        }
+
+        return res.status(200).json({ user: { '_id': user._id, 'name': user.name, 'email': user.email }, authenticated: true })
+    } catch (error) {
+        return res.status(500).json({ error: "Credenciais incorretas. Tente novamente!" })
+    }
+})
+
 module.exports = router
